@@ -11,6 +11,7 @@ public class HomeController{
 	
 	@RequestMapping("/")	// http://localhost:8080/sptringwebapp/
 	public String index() {
+		log.info("실행2");
 		return "index";
 	}
 
