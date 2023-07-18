@@ -7,7 +7,9 @@
 	</configSuffixes>
 	<enableImports><![CDATA[false]]></enableImports>
 	<configs>
-		<config>src/main/webapp/WEB-INF/DispatcherServlet-servlet.xml</config>
+		<config>src/main/resources/spring/dispatcher/component-scan.xml</config>
+		<config>src/main/resources/spring/dispatcher/view-resolve.xml</config>
+		<config>src/main/resources/spring/root/component-scan.xml</config>
 	</configs>
 	<autoconfigs>
 	</autoconfigs>
