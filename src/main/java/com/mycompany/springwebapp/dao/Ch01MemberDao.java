@@ -1,4 +1,4 @@
-package com.mycompany.springwebapp.dto;
+package com.mycompany.springwebapp.dao;
 
 import org.springframework.stereotype.Repository;
 
