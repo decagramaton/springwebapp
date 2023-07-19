@@ -31,10 +31,8 @@ public class HomeController{
 		log.info("homeMethod3() 실행");
 	}
 	
-	@RequestMapping("/")	// http://localhost:8080/sptringwebapp/
+	@RequestMapping("/")	// http://localhost:8080/sptringwebapp/ 요청 시, HomeController.index() 실행 설정
 	public String index() {
-		log.info("실행1");
-		log.info("실행2");
-		return "index";
+		return "home";
 	}
 }
