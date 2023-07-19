@@ -9,6 +9,10 @@ import lombok.extern.slf4j.Slf4j;
 @Controller
 public class HomeController{
 	
+	public HomeController() {
+		log.info("HomeController 생성자 실행");
+	}
+	
 	@RequestMapping("/")	// http://localhost:8080/sptringwebapp/
 	public String index() {
 		log.info("실행1");
