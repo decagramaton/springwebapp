@@ -15,7 +15,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.mycompany.springwebapp.dto.Ch02Dto;
 import com.mycompany.springwebapp.dto.Ch02FileInfo;
+import com.mycompany.springwebapp.interceptor.Auth;
+import com.mycompany.springwebapp.interceptor.Auth.Role;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -45,11 +48,28 @@ public class Ch02Controller {
 	
 	
 	//@RequestMapping(value="/method", method=RequestMethod.PUT)
-	@PutMapping("/method")
+	/*@PutMapping("/method")
 	public void putMethod(@RequestBody String json, HttpServletResponse response) throws IOException {
 		JSONObject jsonObject = new JSONObject(json);
 		log.info("bkind : " + jsonObject.getString("bkind"));
 		log.info("bno : " + jsonObject.getString("bno"));
+		
+		JSONObject root = new JSONObject();
+		root.put("result", "success");
+		String responseJson = root.toString();
+		
+		response.setContentType("application/json; charset=UTF-8");
+		PrintWriter pw = response.getWriter();
+		pw.print(responseJson);
+		pw.flush();
+		pw.close();
+	}*/
+	
+	
+	@PutMapping("/method")
+	public void putMethod(@RequestBody Ch02Dto dto, HttpServletResponse response) throws IOException {
+		log.info("bkind : " + dto.getBkind());
+		log.info("bno : " + dto.getBno());
 		
 		JSONObject root = new JSONObject();
 		root.put("result", "success");
@@ -111,5 +131,10 @@ public class Ch02Controller {
 		return fileinfo;
 	}
 	
-	
+	@RequestMapping("/filterAndInterceptor")
+	@Auth(Role.ADMIN)
+	public String adminMethod() {
+		log.info("run");
+		return "ch02/adminPage";
+	}
 }

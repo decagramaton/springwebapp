@@ -4,7 +4,7 @@
 
 <div class="card m-2">
    <div class="card-header">
-      Home
+      	관리자 페이지
    </div>
    <div class="card-body">
    </div>
