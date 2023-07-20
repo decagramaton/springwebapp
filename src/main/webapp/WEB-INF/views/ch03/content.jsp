@@ -17,7 +17,7 @@
 		      <a class="btn btn-info btn-sm" 
 		         href="method1?param1=문자열&param2=5&param3=3.14&param4=true&param5=2021-08-27">요청</a>
 		      <hr/>
-		      <form method="get" action="method1">
+		      <form method="get" action="method2">
 		         <div class="input-group">
 		            <div class="input-group-prepend"><span class="input-group-text">param1</span></div>
 		            <input type="text" name="param1" class="form-control" value="문자열">
@@ -55,7 +55,7 @@
 		      POST 방식으로 요청
 		   </div>
 		   <div class="card-body">
-		      <form method="post" action="method2">
+		      <form method="post" action="method3">
 		         <div class="input-group">
 		            <div class="input-group-prepend"><span class="input-group-text">param1</span></div>
 		            <input type="text" name="param1" class="form-control" value="문자열">
@@ -123,8 +123,8 @@
 		         </div>
 		      </form>
 		      <div class="mt-2">
-		         <button class="btn btn-info btn-sm" onclick="requestGet()">GET 방식 요청</button>
-		       <button class="btn btn-info btn-sm" onclick="requestPost()">POST 방식 요청</button>
+		        <button class="btn btn-info btn-sm" onclick="requestGet()">GET 방식 요청</button>
+		       	<button class="btn btn-info btn-sm" onclick="requestPost()">POST 방식 요청</button>
 		    </div>
 		 </div>
 		 <script>
@@ -142,7 +142,7 @@
 		       console.log("param5:", param5);
 		       
 		       $.ajax({
-		          url:"method1",
+		          url:"GetObjectParameterMethod",
 		          method:"get",
 		          data: {
 		             param1:param1, 
@@ -150,9 +150,11 @@
 		             param3, 
 		             param4, 
 		             param5
-		          }
-		       })
-		       .done(() => {});
+		          },
+		       	  success: function(data) {
+		       		 console.log(data);
+		       	  }
+		       });
 		    }
 		    
 		    function requestPost() {
@@ -163,7 +165,7 @@
 		       const param5 = $("#param5").val();
 		       
 		       $.ajax({
-		          url:"method2",
+		          url:"GetObjectParameterMethod",
 		          method:"post",
 		          data: {
 		             param1:param1, 
@@ -171,9 +173,11 @@
 		             param3, 
 		             param4, 
 		             param5
-		          }
-		       })
-		       .done(() => {});
+		          },
+		       	  success: function(data) {
+		       		 console.log(data);
+		       	  }
+		       });
 		    }
 		 </script>
 		</div>
