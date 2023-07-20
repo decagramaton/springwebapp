@@ -14,7 +14,7 @@
             POST 방식으로 요청
          </div>
          <div class="card-body">
-            <form id="form0" method="post" action="method1" onsubmit="checkData(this)">
+            <form id="form0" method="post" action="method1" onsubmit="checkData()">
                <div class="input-group">
                   <div class="input-group-prepend"><span class="input-group-text">param1</span></div>
                   <input type="text" name="param1" class="form-control" value="">
@@ -50,7 +50,9 @@
             </form>
          </div>
          <script>
-            function checkData(form) {
+            function checkData() {
+            	const form = document.querySelector("#form0");
+            	
                //form의 제출 기능을 off
                event.preventDefault();
                
@@ -115,6 +117,7 @@
                
                //서버로 제출할지 말지 결정
                if(checkResult) {
+            	   // 코드로 action 속성에 지정된 경로로 데이터 제출
                   form.submit();
                }
             }

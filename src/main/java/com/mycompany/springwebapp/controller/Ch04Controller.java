@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.mycompany.springwebapp.dto.Ch03Dto;
+import com.mycompany.springwebapp.dto.Ch04Dto;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -28,4 +29,13 @@ public class Ch04Controller {
 		return "ch04/content";
 	}
 	
+	@PostMapping("/method1")
+	public String method1(Ch04Dto dto) {
+		log.info("Param1 : " + dto.getParam1());
+		log.info("Param2 : " + dto.getParam2());
+		log.info("Param3 : " + dto.getParam3());
+		log.info("Param4 : " + dto.isParam4());
+		log.info("Param5 : " + dto.getParam5());
+		return "redirect:/ch04/content";
+	}
 }
