@@ -1,8 +1,14 @@
 package com.mycompany.springwebapp.controller;
 
 import java.io.IOException;
+import java.io.OutputStream;
 import java.io.PrintWriter;
+import java.net.URLEncoder;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONObject;
@@ -129,6 +135,39 @@ public class Ch02Controller {
 		Ch02FileInfo fileinfo = new Ch02FileInfo();
 		fileinfo.setFileName("photo5.jpg");
 		return fileinfo;
+	}
+	
+	@GetMapping("/fileDownload")
+	public void fileDownloadMethod(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		// Step1. file 경로 설정
+		String fileName = "photo1.jpg";
+		String filePath = "/resources/"+fileName;
+		filePath = request.getServletContext().getRealPath(filePath);
+		log.info("filePath : " + filePath);
+		
+		// Step2. 응답 헤드에 Context-type 추가
+		String mimeType = request.getServletContext().getMimeType(filePath);
+		response.setContentType(mimeType);	//"image/jpeg"
+		
+		// Step3. 응답헤드에 한글 이름의 파일 이름을 인코딩하여 추가
+		String userAgent = request.getHeader("User-Agent");
+		if(userAgent.contains("Trident") || userAgent.contains("MSIE")) {
+			// IE
+			fileName = URLEncoder.encode(fileName, "UTF-8");
+			log.info(fileName);
+		} else {
+			// chrome, edge, firefox, safari
+			// HTTP 헤더에는 한글이 들어갈 수 없으므로, UTF-8을 ISO-8859-1 형식으로 변환한다.
+			fileName = new String(fileName.getBytes("UTF-8"), "ISO-8859-1");
+		}
+		response.setHeader("Content-Disposition", "attachment; filename=\""+ fileName +"\"");
+		
+		// 응답 본문에 파일 데이터 싣기
+		OutputStream os = response.getOutputStream();
+		Path path = Paths.get(filePath);
+		Files.copy(path, os);
+		os.flush();
+		os.close();
 	}
 	
 	@RequestMapping("/filterAndInterceptor")
