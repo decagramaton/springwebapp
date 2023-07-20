@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.mycompany.springwebapp.dto.Ch02Dto;
 import com.mycompany.springwebapp.dto.Ch02FileInfo;
@@ -37,6 +38,16 @@ public class Ch02Controller {
 	public String content() {
 		return "ch02/content";
 	}
+	
+	/*@RequestMapping("/content")
+	public ModelAndView content() {
+		ModelAndView mav = new ModelAndView();
+		// Model
+		mav.addObject("data", "홍길동");
+		// View
+		mav.setViewName("ch02/content");
+		return mav;
+	}*/
 	
 	//@GetMapping("/method")
 	@RequestMapping(value="/method", method=RequestMethod.GET)
