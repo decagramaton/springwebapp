@@ -26,34 +26,34 @@ public class Ch04Form1Validator implements Validator {
       //param1 검사
       String param1 = ch04Form1.getParam1();
       if(param1 == null || param1.equals("")) {
-         errors.rejectValue("param1", "errors.form1.param1.required", "필수 입력");
+         errors.rejectValue("param1", "errors.form.required", "필수 입력(D)");
       } else if(param1.length() < 8) {
-         errors.rejectValue("param1", "errors.form1.param1.minlength", "최소 8자 입력");
+         errors.rejectValue("param1", "errors.form.minlength", new Object[] {8},"최소 8자 입력(D)");
       } else if(param1.length() > 15) {
-         errors.rejectValue("param1", "errors.form1.param1.maxlength", "최대 15자 입력");
+         errors.rejectValue("param1", "errors.form.maxlength", new Object[] {15},"최대 15자 입력(D)");
       }
       
       //param2 검사
       String param2 = ch04Form1.getParam2();
       if(param2 == null || param2.equals("")) {
-         errors.rejectValue("param2", "errors.form1.param2.required", "필수 입력");
+         errors.rejectValue("param2", "errors.form.required", "필수 입력(D)");
       } else {
          String regExp = "(010|011)-[0-9]{3,4}-[0-9]{4}";
          boolean result = Pattern.matches(regExp, param2);
          if(result == false) {
-            errors.rejectValue("param2", "errors.form1.param2.format", "전화번호 형식에 맞지 않음");
+            errors.rejectValue("param2", "errors.form.format", "형식에 맞지 않음(D)");
          }
       }
       
       //param3 검사
       String param3 = ch04Form1.getParam3();
       if(param3 == null || param3.equals("")) {
-         errors.rejectValue("param3", "errors.form1.param3.required", "필수 입력");
+         errors.rejectValue("param3", "errors.form.required", "필수 입력(D)");
       } else {
          String regExp = "([\\w-]+(?:\\.[\\w-]+)*)@((?:[\\w-]+\\.)*\\w[\\w-]{0,66})\\.([a-z]{2,6}(?:\\.[a-z]{2})?)";
          boolean result = Pattern.matches(regExp, param3);
          if(result == false) {
-            errors.rejectValue("param3", "errors.form1.param3.format", "이메일 형식에 맞지 않음");
+            errors.rejectValue("param3", "errors.form.format", "형식에 맞지 않음(D)");
          }
       }
    }
