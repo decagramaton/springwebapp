@@ -135,34 +135,34 @@
          <div class="card-body">
             <form id="form2" name="form2">
                <div class="input-group">
-                  <div class="input-group-prepend"><span class="input-group-text">param1</span></div>
-                  <input type="text" id="param1" name="param1" class="form-control">
-                  <span class="param1-error text-danger"></span>
+                  <div class="input-group-prepend"><span class="input-group-text">ssn</span></div>
+                  <input type="text" id="ssn" name="ssn" class="form-control"  value="${ch04Form2.ssn}">
+                  <form:errors path="ch04Form2.ssn" cssClass="ssn-error text-danger"/>
                </div>
                <div class="input-group">
-                  <div class="input-group-prepend"><span class="input-group-text">param2</span></div>
-                  <input type="text" id="param2" name="param2" class="form-control">
-                  <span class="param2-error text-danger"></span>
+                  <div class="input-group-prepend"><span class="input-group-text">YearMonthDay</span></div>
+                  <input type="text" id="yearMonthDay" name="yearMonthDay" class="form-control" value="${ch04Form2.yearMonthDay}">
+                  <span class="yearMonthDay-error text-danger"></span>
                </div>
                <div class="input-group">
-                  <div class="input-group-prepend"><span class="input-group-text">param3</span></div>
-                  <input type="text" id="param3" name="param3" class="form-control">
-                  <span class="param3-error text-danger"></span>
+                  <div class="input-group-prepend"><span class="input-group-text">Password</span></div>
+                  <input type="text" id="password" name="password" class="form-control" value="${ch04Form2.password}">
+                  <span class="password-error text-danger"></span>
                </div>
                <div class="input-group">
-                  <div class="input-group-prepend"><span class="input-group-text">param4</span></div>
+                  <div class="input-group-prepend"><span class="input-group-text">Power</span></div>
                   <div class="btn-group btn-group-toggle" data-toggle="buttons">
                      <label class="btn btn-secondary active">
-                       <input type="radio" id="radio1" name="param4" checked value="true"> true
+                       <input type="radio" id="radio1" name="power" <c:if test="${ch04Form2.power}">checked</c:if> value="true"> true
                      </label>
                      <label class="btn btn-secondary">
-                       <input type="radio" id="radio2" name="param4" value="false"> false
+                       <input type="radio" id="radio2" name="power" <c:if test="${ch04Form2.power}">checked</c:if> value="false"> false
                      </label>
                   </div>
                </div>
                <div class="input-group">
-                  <div class="input-group-prepend"><span class="input-group-text">param5</span></div>
-                  <input type="date" id="param5" name="param5" class="form-control" value="2030-12-05">
+                  <div class="input-group-prepend"><span class="input-group-text">Calendar</span></div>
+                  <input type="date" id="param5" name="calendar" class="form-control" value='<fmt:formatDate value="${ch04Form2.calendar}" pattern="yyyy-MM-dd"/>'>
                </div>
             </form>
             <div class="mt-2">
@@ -179,7 +179,7 @@
                
                let checkData = true;
                
-               const param1Error = $("#form2 .param1-error");
+               /* const param1Error = $("#form2 .param1-error");
                param1Error.html("");
                if(param1 === "") {
                   param1Error.html("필수 입력 사항");
@@ -191,21 +191,23 @@
                      param1Error.html("주민번호 형식이 아님");
                      checkData = false;
                   }
-               }
+               } */
                
                if(checkData) {
                   $.ajax({
-                     url:"method1",
+                     url:"method2",
                      method:"post",
                      data: {
-                        param1:param1, 
-                        param2, 
-                        param3, 
-                        param4, 
-                        param5
-                     }
-                  })
-                  .done(() => {});
+                    	ssn: document.querySelector("#ssn").value, 
+                    	yearMonthDay: document.querySelector("#yearMonthDay").value, 
+                    	password: document.querySelector("#password").value, 
+                    	power: $("input[name=power]").prop("checked"), 
+                    	calendar: document.querySelector("#param5").value
+                     },
+	   		       	 success: function(data) {
+	 		       		
+	 		       	 }
+                  });
                }
             }
          </script>

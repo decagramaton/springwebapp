@@ -1,10 +1,8 @@
 package com.mycompany.springwebapp.validator;
 
 import java.util.regex.Pattern;
-
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
-
 import com.mycompany.springwebapp.dto.Ch04Form1;
 
 import lombok.extern.slf4j.Slf4j;
