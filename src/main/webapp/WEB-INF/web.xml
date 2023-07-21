@@ -59,6 +59,4 @@
   	<filter-name>Ch02FilterA</filter-name>
   	<url-pattern>/ch02/*</url-pattern>
   </filter-mapping>
-  
-  
 </web-app>

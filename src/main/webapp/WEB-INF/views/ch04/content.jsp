@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
@@ -14,36 +16,38 @@
             POST 방식으로 요청
          </div>
          <div class="card-body">
-            <form id="form0" method="post" action="method1" onsubmit="checkData()">
+         <!-- onsubmit="checkData()" -->
+            <form id="form0" method="post" action="method1">
                <div class="input-group">
                   <div class="input-group-prepend"><span class="input-group-text">param1</span></div>
-                  <input type="text" name="param1" class="form-control" value="">
-                  <span class="param1-error text-danger"></span>
+                  <input type="text" name="param1" class="form-control" value="${ch04Form1.param1}">
+                  <form:errors path="ch04Form1.param1" cssClass="param1-error text-danger"/>
                </div>
                <div class="input-group">
                   <div class="input-group-prepend"><span class="input-group-text">param2</span></div>
-                  <input type="text" name="param2" class="form-control" value="" >
-                  <span class="param2-error text-danger"></span>
+                  <input type="text" name="param2" class="form-control" value="${ch04Form1.param2}" >
+                  <!-- <span class="param2-error text-danger"></span> -->
+                  <form:errors path="ch04Form1.param2" cssClass="param2-error text-danger"/>
                </div>
                <div class="input-group">
                   <div class="input-group-prepend"><span class="input-group-text">param3</span></div>
-                  <input type="text" name="param3" class="form-control" value="">
-                  <span class="param3-error text-danger"></span>
+                  <input type="text" name="param3" class="form-control" value="${ch04Form1.param3}">
+                  <form:errors path="ch04Form1.param3" cssClass="param3-error text-danger"/>
                </div>
                <div class="input-group">
                   <div class="input-group-prepend"><span class="input-group-text">param4</span></div>
                   <div class="btn-group btn-group-toggle" data-toggle="buttons">
                      <label class="btn btn-secondary active">
-                       <input type="radio" name="param4" checked value="true"> true
+                       <input type="radio" name="param4" <c:if test="${ch04Form1.param4}">checked</c:if> value="true"> true
                      </label>
                      <label class="btn btn-secondary">
-                       <input type="radio" name="param4" value="false"> false
+                       <input type="radio" name="param4" <c:if test="${ch04Form1.param4}">checked</c:if> value="false"> false
                      </label>
                   </div>
                </div>
                <div class="input-group">
                   <div class="input-group-prepend"><span class="input-group-text">param5</span></div>
-                  <input type="date" name="param5" class="form-control">
+                  <input type="date" name="param5" class="form-control" value='<fmt:formatDate value="${ch04Form1.param5}" pattern="yyyy-MM-dd"/>'>
                   <span class="param5-error text-danger"></span>
                </div>
                <input class="mt-2 btn btn-info btn-sm" type="submit" value="요청"/>
@@ -129,7 +133,7 @@
             AJAX로 요청
          </div>
          <div class="card-body">
-            <form id="form1" name="form1">
+            <form id="form2" name="form2">
                <div class="input-group">
                   <div class="input-group-prepend"><span class="input-group-text">param1</span></div>
                   <input type="text" id="param1" name="param1" class="form-control">
@@ -175,7 +179,7 @@
                
                let checkData = true;
                
-               const param1Error = $("#form1 .param1-error");
+               const param1Error = $("#form2 .param1-error");
                param1Error.html("");
                if(param1 === "") {
                   param1Error.html("필수 입력 사항");
@@ -209,15 +213,15 @@
       
       <div class="card m-2">
          <div class="card-header">
-            서버측 유효성 검사
+            	서버측 유효성 검사
          </div>
          <div class="card-body">
             <div class="card m-2">
                <div class="card-header">
-                  회원 가입 폼
+                  	회원 가입 폼
                </div>
                <div class="card-body">         
-                  <form method="post" action="join">
+                  <form id="form3" method="post" action="join">
                      <div class="input-group">
                         <div class="input-group-prepend"><span class="input-group-text">mid</span></div>
                         <input type="text" name="mid" class="form-control" value="${joinForm.mid}" autocomplete="username">
@@ -245,10 +249,10 @@
          
             <div class="card m-2">
                <div class="card-header">
-                  로그인 폼
+                  	로그인 폼
                </div>
                <div class="card-body">
-                  <form method="post" action="login">
+                  <form id="form4" method="post" action="login">
                      <div class="input-group">
                         <div class="input-group-prepend"><span class="input-group-text">mid</span></div>
                         <input type="text" name="mid" class="form-control" value="${loginForm.mid}">
