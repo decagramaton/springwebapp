@@ -133,7 +133,7 @@
             AJAX로 요청
          </div>
          <div class="card-body">
-            <form id="form2" name="form2">
+            <form id="form2" name="form2" action="method2">
                <div class="input-group">
                   <div class="input-group-prepend"><span class="input-group-text">ssn</span></div>
                   <input type="text" id="ssn" name="ssn" class="form-control"  value="${ch04Form2.ssn}">
@@ -164,10 +164,10 @@
                   <div class="input-group-prepend"><span class="input-group-text">Calendar</span></div>
                   <input type="date" id="param5" name="calendar" class="form-control" value='<fmt:formatDate value="${ch04Form2.calendar}" pattern="yyyy-MM-dd"/>'>
                </div>
+	            <div class="mt-2">
+	               <button type="submit" class="btn btn-info btn-sm">POST 방식 요청</button>
+	            </div>
             </form>
-            <div class="mt-2">
-               <button class="btn btn-info btn-sm" onclick="requestPost()">POST 방식 요청</button>
-            </div>
          </div>
          <script>
             function requestPost() {
