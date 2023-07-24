@@ -5,9 +5,7 @@
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 
 <div class="card m-2">
-	<div class="card-header">
-	   Ch01. 컨트롤러 생성과 뷰이름 리턴
-	</div>
+	<div class="card-header">Ch01. 컨트롤러 생성과 뷰이름 리턴</div>
 	<div class="card-body">
 		<!-- 절대 경로 방법 -->
 		<a class="btn btn-info btn-sm" href="${pageContext.request.contextPath}/ch01/button1">버튼1</a>
