@@ -2,6 +2,33 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 
+
+<div class="card m-2">
+	<div class="card-header">Ch08. Session 이동 - 로그인</div>
+	<div class="card-body">
+		<c:if test="${login == null}">
+			<form method="POST" action="login">
+			  <div class="form-group">
+			    <label for="mid">Member ID:</label>
+			    <input type="text" class="form-control" id="mid" name="mid">
+			  </div>
+			  <div class="form-group">
+			    <label for="mpassword">Member Password:</label>
+			    <input type="password" class="form-control" id="mpassword" name="mpassword">
+			  </div>
+			  <button type="submit" class="btn btn-primary btn-sm">로그인</button>
+			</form>
+		</c:if>
+		
+		<c:if test="${login != null}">
+		<img src="${pageContext.request.contextPath}/resources/${login.mid}.jpg" width="100"/>
+			현재 ${login.mid} 로그인 됨
+			<a href="logout" class="btn btn-info btn-sm">로그아웃</a>
+		</c:if>
+	</div>
+</div>
+
+
 <div class="card m-2">
 	<div class="card-header">Ch08. Session 이동</div>
 	<div class="card-body">

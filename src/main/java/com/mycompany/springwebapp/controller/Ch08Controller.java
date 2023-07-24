@@ -3,16 +3,17 @@ package com.mycompany.springwebapp.controller;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.websocket.Session;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.SessionAttribute;
 
 import com.mycompany.springwebapp.dto.Ch08Item;
+import com.mycompany.springwebapp.dto.Ch08Member;
+import com.mycompany.springwebapp.interceptor.Login;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -25,10 +26,32 @@ public class Ch08Controller {
 		return "ch08/content";
 	}
 	
+	@RequestMapping("/login")
+	public String login(Ch08Member member, HttpSession session) {
+		if(member.getMid().equals("member01") && member.getMpassword().equals("12345")) {
+			member.setMname("하여름");
+			member.setMtel("010-1234-1234");
+			member.setMaddress("서울시 종로구 혜화동");
+			session.setAttribute("login", member);
+		}
+		return "redirect:/ch08/content";
+	}
+	
+	@GetMapping("/logout")
+	@Login
+	public String logout(HttpSession session) {
+		session.removeAttribute("login");
+		return "redirect:/ch08/content";
+	}
+	
+	
 	@PostMapping("/addCart")
-	public String addCart(Ch08Item item, HttpSession session) {
+	@Login
+	public String addCart(Ch08Item item,
+					HttpSession session,
+					@SessionAttribute(value="cart", required=false) List<Ch08Item> cart) {
 		// get Cart Object in Session
-		List<Ch08Item> cart = (List<Ch08Item>) session.getAttribute("cart");
+		//List<Ch08Item> cart = (List<Ch08Item>) session.getAttribute("cart");
 		
 		// 세션에 카드가 없을 경우, 새 객체를 세션에 저장
 		if(cart == null) {
@@ -54,6 +77,7 @@ public class Ch08Controller {
 	}
 	
 	@GetMapping("/clearCart")
+	@Login
 	public String clearCart(HttpSession session) {
 		// 세션 삭제 방법1. 세션에 저장된 객체 삭제
 		session.removeAttribute("cart");

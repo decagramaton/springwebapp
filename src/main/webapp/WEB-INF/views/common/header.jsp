@@ -21,12 +21,15 @@
             </a>
             <div>
                <div>
-                  <c:if test="${loginId == null}">
-                     <a href="${pageContext.request.contextPath}/exam07/SaveSessionController" class="btn btn-success btn-sm">로그인</a>
+                  <c:if test="${login == null}">
+                     <a href="${pageContext.request.contextPath}/ch08/login" class="btn btn-success btn-sm">로그인</a>
+                     <!-- <a href="${pageContext.request.contextPath}/exam07/SaveSessionController" class="btn btn-success btn-sm">로그인</a> -->
                   </c:if>
-                  <c:if test="${loginId != null}">
+                  <c:if test="${login != null}">
                      <span class="mr-2">${loginId}</span>
-                     <a href="${pageContext.request.contextPath}/exam07/RemoveSessionController" class="btn btn-success btn-sm">로그아웃</a>
+                     <img src="${pageContext.request.contextPath}/resources/${login.mid}.jpg" width="30"/>
+                     <a href="${pageContext.request.contextPath}/ch08/logout" class="btn btn-success btn-sm">로그아웃</a>
+                     <!-- <a href="${pageContext.request.contextPath}/exam07/RemoveSessionController" class="btn btn-success btn-sm">로그아웃</a> -->
                   </c:if>
                </div>
             </div>
