@@ -13,22 +13,22 @@ import lombok.extern.slf4j.Slf4j;
 public class HomeController{
 	
 	public HomeController() {
-		log.info("HomeController 생성자 실행");
+		//log.info("HomeController 생성자 실행");
 	}
 	
 	@PostConstruct
 	public void homeMethod1() {
-		log.info("homeMethod1() 실행");
+		//log.info("homeMethod1() 실행");
 	}
 	
 	@PostConstruct
 	public void homeMethod2() {
-		log.info("homeMethod2() 실행");
+		//log.info("homeMethod2() 실행");
 	}
 	
 	@PreDestroy
 	public void homeMethod3() {
-		log.info("homeMethod3() 실행");
+		//log.info("homeMethod3() 실행");
 	}
 	
 	@RequestMapping("/")	// http://localhost:8080/sptringwebapp/ 요청 시, HomeController.index() 실행 설정

@@ -10,6 +10,13 @@
 		</div>
 		<div class="m-2">
 			<a href="createCookie" class="btn btn-info btn-sm">Cookie 생성</a>
+			<a href="getCookie" class="btn btn-info btn-sm">서버에서 Cookie 데이터 얻기</a>
+			<a href="javascript:getCookie()" class="btn btn-info btn-sm">JavaScript에서 Cookie 데이터 얻기</a>
+			<script>
+				function getCookie() {
+					console.log(document.cookie);
+				}
+			</script>
 		</div>
 	</div>
 </div>
