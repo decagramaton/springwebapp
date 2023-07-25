@@ -56,4 +56,11 @@
          <a class="text-white" href="${pageContext.request.contextPath}/ch08/content">세션을 활용한 데이터 전달 Data Delivery</a>
       </h6>
    </li>
+   
+   <li class="nav-item mb-2">
+      <h6 class="text-white">
+         <span class="mr-2">Ch09.</span>
+         <a class="text-white" href="${pageContext.request.contextPath}/ch09/content">File Upload & Download</a>
+      </h6>
+   </li>
 </ul>

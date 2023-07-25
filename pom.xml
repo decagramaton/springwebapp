@@ -121,5 +121,13 @@
 	</dependency>
 	
 	
+	<!-- Ch09 멀티파트 해석을 위한 commons-fileupload 의존성 설정 -->
+	<dependency>
+	    <groupId>commons-fileupload</groupId>
+	    <artifactId>commons-fileupload</artifactId>
+	    <version>1.5</version>
+	</dependency>
+	
+	
   </dependencies>
 </project>

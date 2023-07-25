@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+	<!-- 방법1. commons-fileupload 라이브러리를 이용
+	- maxUploadSize : 한 요청당 업로드가 허용되는 최대 용량을 바이트 단위로 설정합니다. -1 은 제한이 없다는 뜻으로 이 프로퍼티를 지정하지 않을때 기본값입니다.
+	- maxUploadSizePerFile : 한 파일당 업로드가 허용되는 최대 용량을 바이트 단위로 설정합니다. -1 은 제한이 없다는 뜻으로 이 프로퍼티를 지정하지 않을때 기본값입니다.
+	- maxInMemorysize : 디스크에 저장하지 않고 메모리에 유지하도록 허용하는 바이트 단위의 최대 용량을 설정합니다. 사이즈가 이보다 클 경우 이 사이즈 이상의 데이터는 파일에 저장됩니다. 기본값은 10240 바이트 입니다.
+	- uploadTempDir : 업로드된 파일이 저장되는 임시 디렉토리를 설정합니다. 기본값은 웹 응용 프로그램에 대한 서블릿 컨테이너의 임시 디렉토리입니다.
+	-->
+
+
+	<!-- 빈 이름으로 객체를 찾아서 이용하므로 id가 필수 -->
+	<!-- ID 값에 한글 해보니까 안되더라 ㅋㅋㅋ -->
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<!-- 전체 Body 데이터 요청 크기 제한 : 100Mbyte (1024 byte * 1024 * 100 ) -->
+		<property name="maxUploadSize" value="104857600"/>	
+		
+		<!-- Request Body에 포함된 파일 1개당 크기 제한 : 20Mbye (1024 * 1024* 20) -->
+		<property name="maxUploadSizePerFile" value="20971520"/>
+		
+		<!-- 임시 파일이 저장될 디렉토리 : path="/C:/Temp 폴더"-->
+		<property name="uploadTempDir" value="file:/C:/Temp"></property>
+		
+		<!-- 임시 파일로 저장하는 크기의 기준 : 1Mbyte-->
+		<property name="maxInMemorySize" value="1048576"></property>
+	</bean>
+	
+	
+	<!-- Servlet 3.0 이상에서 지원하는 표준 라이브러리 이용
+	web.xml에서 multipart-config 태그로 설정 내용 추가
+	
+	<multipart-config>
+  		<location>C:/Temp</location>
+  		<max-file-size>20971520</max-file-size>
+  		<max-request-size>104857600</max-request-size>
+  		<file-size-threshold>1048576</file-size-threshold>
+  	</multipart-config>
+	-->
+	<bean id="standardServletMultipartResolver" class="org.springframework.web.multipart.support.StandardServletMultipartResolver"/>
+</beans>
