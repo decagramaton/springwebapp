@@ -27,7 +27,7 @@
                   </c:if>
                   <c:if test="${login != null}">
                      <span class="mr-2">${loginId}</span>
-                     <img src="${pageContext.request.contextPath}/resources/${login.mid}.jpg" width="30"/>
+                     <img src="${pageContext.request.contextPath}/resources/photo1.jpg" width="30"/>
                      <a href="${pageContext.request.contextPath}/ch08/logout" class="btn btn-success btn-sm">로그아웃</a>
                      <!-- <a href="${pageContext.request.contextPath}/exam07/RemoveSessionController" class="btn btn-success btn-sm">로그아웃</a> -->
                   </c:if>
