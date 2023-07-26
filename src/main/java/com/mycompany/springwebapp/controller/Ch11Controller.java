@@ -119,4 +119,43 @@ public class Ch11Controller {
 		log.info(member.toString());
 		return "redirect:/ch11/content";
 	}
+	
+	
+	
+	@GetMapping("/form4")
+	public String getForm4(@ModelAttribute("member") Ch11Member member, Model model) {
+		
+		List<String> jobList = new ArrayList<>();
+		jobList.add("학생");
+		jobList.add("교수");
+		jobList.add("임직원");
+		jobList.add("사서");
+		jobList.add("학군단");
+		
+		model.addAttribute("jobList", jobList);
+		member.setMjob("사서");
+		
+		// ------------------------------------
+		
+		List<Ch11City> cityList = new ArrayList<>();
+		cityList.add(new Ch11City(1, "서울"));
+		cityList.add(new Ch11City(2, "부산"));
+		cityList.add(new Ch11City(3, "제주"));
+		model.addAttribute("cityList", cityList);
+		member.setMcity(2);
+
+		return "ch11/form4";
+	}
+	
+	@PostMapping("/form4")
+	public String postForm4(@ModelAttribute("member") Ch11Member member) {
+		log.info(member.toString());
+		return "redirect:/ch11/content";
+	}
+	
+	@GetMapping("/form5")
+	public String getForm5() {
+
+		return "ch11/form5";
+	}
 }

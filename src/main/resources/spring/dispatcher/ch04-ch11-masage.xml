@@ -9,6 +9,13 @@
 
 	<!-- ID 속성 값을 반드시 작성해야 한다. -->
 	<bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
-		<property name="basename" value="message.ch04_error"/>
+		<property name="basenames">
+			<list>
+				<!-- message : src/main/resource 경로의 패키지 이름 -->
+				<!-- ch04_error : 프로퍼티(properties) 파일 이름 -->
+				<value>message.ch04_error</value>
+				<value>message.ch11_Internationalization</value>
+			</list>
+		</property>
 	</bean>
 </beans>

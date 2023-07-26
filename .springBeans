@@ -13,9 +13,9 @@
 		<config>src/main/resources/spring/dispatcher/ch01-static-resource.xml</config>
 		<config>src/main/resources/spring/dispatcher/ch02-ch08-interceptor.xml</config>
 		<config>src/main/resources/spring/dispatcher/ch09-multipart-resolver.xml</config>
+		<config>src/main/resources/spring/dispatcher/ch04-ch11-masage.xml</config>
 	</configs>
 	<autoconfigs>
-		<config>src/main/resources/spring/dispatcher/ch04-error-masage.xml</config>
 	</autoconfigs>
 	<configSets>
 	</configSets>
