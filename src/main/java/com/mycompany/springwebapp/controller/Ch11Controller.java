@@ -73,6 +73,7 @@ public class Ch11Controller {
 		cityList.add(new Ch11City(1, "서울"));
 		cityList.add(new Ch11City(2, "부산"));
 		cityList.add(new Ch11City(3, "제주"));
+		member.setMcity(3);
 		model.addAttribute("cityList", cityList);
 		
 		return "ch11/form2";
