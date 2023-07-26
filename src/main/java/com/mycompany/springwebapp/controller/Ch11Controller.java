@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.mycompany.springwebapp.dto.Ch11City;
 import com.mycompany.springwebapp.dto.Ch11Member;
+import com.mycompany.springwebapp.dto.Ch11Skill;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -79,4 +80,43 @@ public class Ch11Controller {
 		return "ch11/form2";
 	}
 
+	@PostMapping("/form2")
+	public String postForm2(@ModelAttribute("member") Ch11Member member) {
+		log.info(member.toString());
+		return "redirect:/ch11/content";
+	}
+
+	
+	
+	@GetMapping("/form3")
+	public String getForm3(@ModelAttribute("member") Ch11Member member, Model model) {
+		
+		List<String> languageList = new ArrayList<>();
+		languageList.add("C");
+		languageList.add("Python");
+		languageList.add("Java");
+		languageList.add("Javascript");
+		languageList.add("HTML");
+		
+		model.addAttribute("languageList", languageList);
+		member.setMlanguage(new String[] {"Java", "HTML"});
+		
+		
+		// ------------------------------------
+		
+		List<Ch11Skill> skillList = new ArrayList<>();
+		skillList.add(new Ch11Skill(1, "SpringFramework"));
+		skillList.add(new Ch11Skill(2, "Bootstrap"));
+		skillList.add(new Ch11Skill(3, "MyBatis"));
+		model.addAttribute("skillList", skillList);
+		member.setMskill(new int[] {1,2});
+
+		return "ch11/form3";
+	}
+	
+	@PostMapping("/form3")
+	public String postForm3(@ModelAttribute("member") Ch11Member member) {
+		log.info(member.toString());
+		return "redirect:/ch11/content";
+	}
 }

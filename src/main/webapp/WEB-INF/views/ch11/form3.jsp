@@ -1,5 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 
 <div class="card m-2">
@@ -26,6 +27,10 @@
 		
 		<form:form modelAttribute="member" method="post" action="form3" class="mt-3">
 			<div>
+				<!--
+				cssClass="mr-2" - HTML문서 내 Class 추가 속성
+				delimiter="&nbsp; | &nbsp;" - 체크박스 사이에 들어가는 기호,  &nbsp; - 한칸 띄어쓰기
+				-->
 				<form:checkboxes items="${languageList}" path="mlanguage" 
 				                 cssClass="mr-2" delimiter="&nbsp; | &nbsp;"/>
 			</div>
@@ -40,6 +45,7 @@
 			</div>
 			<button class="btn btn-info btn-sm">제출</button>
 		</form:form>
+
 	</div>
 </div>
 
