@@ -12,13 +12,60 @@
 	<bean class="com.mycompany.springwebapp.service.Ch12ServiceCreateByXml"/>
 	<bean id="name1" class="com.mycompany.springwebapp.service.Ch12ServiceCreateByXml"/>
 	
-	
 	<!-- 정적 메소드로 객체 생성 방법 -->
 	<bean id="name2" class="com.mycompany.springwebapp.service.Ch12ServiceCreateByXml" factory-method="getInstance"/>
-	
 	
 	<!-- 인스턴스 메소드로 객체 생성 방법 -->
 	<bean id="name3" factory-bean="name1" factory-method="getSelfObject"/>
 	
 	
+	
+	
+	<!-- DAO 객체 생성 방법 -->
+	<!-- name=""는 Setter를 호출함으로써, Setter 메소드 명을 값으로 가진다.
+		 ref=""는 reference로써, Bean 객체의 ID를 값으로 가진다	
+	<bean class="com.mycompany.springwebapp.service.Ch12ServiceDiByXml">
+		name=""는 Setter를 호출함으로써, Setter 메소드 명을 값으로 가진다.
+		ref=""는 reference로써, Bean 객체의 ID를 값으로 가진다
+		<property name="ch12DaoByXml1" ref="daoByXml1"></property>
+		<property name="ch12DaoByXml2" ref="daoByXml2"></property>
+		<property name="ch12DaoByXml3" ref="daoByXml3"></property>
+	</bean> -->
+	
+	<bean class="com.mycompany.springwebapp.service.Ch12ServiceDiByXml">
+		<constructor-arg ref="daoByXml1"/>  <!-- 생성자 주입 코드-->
+		<property name="ch12DaoByXml2" ref="daoByXml2"/> <!-- Setter 주입 코드-->
+		<property name="ch12DaoByXml3" ref="daoByXml3"/>
+		<property name="collection1">
+			<list>
+				<value>아이템1</value>			
+				<value>아이템2</value>			
+				<value>아이템3</value>						
+			</list>
+		</property>
+		<property name="collection2">
+			<set>
+				<ref bean="daoByXml1"/>
+				<ref bean="daoByXml2"/>
+				<ref bean="daoByXml3"/>
+			</set>
+		</property>
+		<property name="collection3">
+			<map>
+				<entry key="key1" value="홍길동"></entry>
+				<entry key="key2" value-ref="daoByXml1"></entry>
+			</map>
+		</property>
+		<property name="collection4">
+			<props>
+				<prop key="key1">데이터1</prop>
+				<prop key="key2">데이터2</prop>
+				<prop key="key3">데이터3</prop>
+			</props>
+		</property>
+	</bean>
+	
+	<bean id="daoByXml1" class="com.mycompany.springwebapp.dao.Ch12DaoByXml1"/>
+	<bean id="daoByXml2" class="com.mycompany.springwebapp.dao.Ch12DaoByXml2"/>
+	<bean id="daoByXml3" class="com.mycompany.springwebapp.dao.Ch12DaoByXml3"/>
 </beans>

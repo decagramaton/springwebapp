@@ -17,4 +17,12 @@ public class Ch12ServiceCreateByXml {
 		log.info("run");
 		return new Ch12ServiceCreateByXml();
 	}
+	
+	public void method1() {
+		log.info("실행");
+	}
+	
+	public void method2() {
+		log.info("실행");
+	}
 }
