@@ -128,6 +128,37 @@
 	    <version>1.5</version>
 	</dependency>
 	
+	<!-- Ch13. spring-jdbc -->
+	<dependency>
+	    <groupId>org.springframework</groupId>
+	    <artifactId>spring-jdbc</artifactId>
+	    <version>5.3.29</version>
+	</dependency>
+	
+	<!-- Ch13. commons-dbcp2 -->
+	<dependency>
+	    <groupId>org.apache.commons</groupId>
+	    <artifactId>commons-dbcp2</artifactId>
+	    <version>2.9.0</version>
+	</dependency>
+	
+	<!-- Ch13. ojdbc8 jdbc driver -->
+	<dependency>
+	    <groupId>com.oracle.database.jdbc</groupId>
+	    <artifactId>ojdbc8</artifactId>
+	    <version>19.3.0.0</version>
+	</dependency>
+	
+	<!-- Ch13. log4jdbc -->
+	<dependency>
+	    <groupId>com.googlecode.log4jdbc</groupId>
+	    <artifactId>log4jdbc</artifactId>
+	    <version>1.2</version>
+	</dependency>
+	
+	<!-- Ch13. MyBatis -->
+	
+	
 	
   </dependencies>
 </project>

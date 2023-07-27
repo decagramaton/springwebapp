@@ -38,7 +38,6 @@ public class Ch12Controller {
 	
 	@RequestMapping("/content")
 	public String content() {
-		// log.info("실행");
 		//serviceDiByXml.method();
 		//serviceDiByAnnotation.method();
 		servicePropertyDi.method();

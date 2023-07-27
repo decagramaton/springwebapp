@@ -8,7 +8,6 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class Ch12DaoByAnotation2 {
 	public Ch12DaoByAnotation2() {
-		log.info("실행");
 	}
 	
 	public void method() {

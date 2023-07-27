@@ -20,29 +20,24 @@ public class Ch12ServiceDiByXml {
 	private Ch12DaoByXml3 daoXml3;
 	
 	// 생성자
-	public Ch12ServiceDiByXml() {log.info("실행1");}
+	public Ch12ServiceDiByXml() {}
 	public Ch12ServiceDiByXml(Ch12DaoByXml1 daoXml1) {
-		log.info("실행2");
 		this.daoXml1 = daoXml1;
 	}
 	
 	// Setter
 	public void setCh12DaoByXml1(Ch12DaoByXml1 daoXml1) {
-		log.info("실행");
 		this.daoXml1 = daoXml1;
 	}
 	public void setCh12DaoByXml2(Ch12DaoByXml2 daoXml2) {
-		log.info("실행");
 		this.daoXml2 = daoXml2;
 	}
 	public void setCh12DaoByXml3(Ch12DaoByXml3 daoXml3) {
-		log.info("실행");
 		this.daoXml3 = daoXml3;
 	}
 	
 	// Collection
 	public void setCollection1(List<String> list) {
-		log.info("실행");
 		for(String item : list) {
 			log.info(item);
 		}
@@ -62,7 +57,6 @@ public class Ch12ServiceDiByXml {
 	
 	// Instance Method
 	public void method() {
-		log.info("실행");
 		daoXml1.method();
 		daoXml2.method();
 		daoXml3.method();
