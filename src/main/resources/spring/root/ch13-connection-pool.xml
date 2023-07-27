@@ -3,15 +3,23 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:mvc="http://www.springframework.org/schema/mvc"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
-		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+	xmlns:jee="http://www.springframework.org/schema/jee"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+		http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
 	<!-- 관례적으로 ID는 dataSource로 설정한다. -->
 	<bean id="dataSource" destroy-method="close" class="org.apache.commons.dbcp2.BasicDataSource">
 		<!-- Connection을 생성하기  위한 정보 -->
-		<property name="driverClassName" value="oracle.jdbc.OracleDriver"/> <!-- 어떤 JDBC 사용? -->
-		<property name="url" value="jdbc:oracle:thin:@localhost:1521:orcl"/> <!-- JDBC 요청 경로 -->
+		<!-- <property name="driverClassName" value="oracle.jdbc.OracleDriver"/> 어떤 JDBC 사용?
+		<property name="url" value="jdbc:oracle:thin:@localhost:1521:orcl"/> JDBC 요청 경로 -->
+		
+		<!-- SQL문을 Log으로 출력하거나, 받은 결과를 Log로 출력하기 위한 설정 -->
+		<property name="driverClassName" value="net.sf.log4jdbc.DriverSpy"/> <!-- Logger 사용 -->
+		<property name="url" value="jdbc:log4jdbc:oracle:thin:@localhost:1521:orcl"/> <!-- JDBC 요청 경로 -->
+		
+		
 		<property name="username" value="spring"/> <!-- DB 계정 ID -->
 		<property name="password" value="oracle"/> <!-- DB 계정 PW -->
 		
@@ -21,7 +29,10 @@
 		<property name="maxIdle" value="2"/>
 	</bean>
 	
-	
-	
+	<!-- WAS에서 관리하는 Connection Pool 참조 -->
+	<!-- WAS관리자에게 Connection-Pool 데이터 소스를 참조하는 값을 알려달라고 하면 된다. -->
+	<!-- jndi-name : Connection Pool Bean 객체의 ID 값 -->
+	<!-- jexpected-type : Connection Pool Bean 객체의 ID 값 -->
+	<!-- <jee:jndi-lookup id="dataSource" jndi-name="참조이름" expected-type="javax.sql.DataSource"/> -->
 	
 </beans>

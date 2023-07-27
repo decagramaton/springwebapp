@@ -15,8 +15,11 @@
 		<config>src/main/resources/spring/dispatcher/ch09-multipart-resolver.xml</config>
 		<config>src/main/resources/spring/dispatcher/ch04-ch11-masage.xml</config>
 		<config>src/main/resources/spring/root/Ch12-createBean-di.xml</config>
+		<config>src/main/resources/spring/root/ch13-mybatis.xml</config>
 	</configs>
 	<autoconfigs>
+		<config>src/main/resources/spring/root/Ch12-properties.xml</config>
+		<config>src/main/resources/spring/root/ch13-connection-pool.xml</config>
 	</autoconfigs>
 	<configSets>
 	</configSets>

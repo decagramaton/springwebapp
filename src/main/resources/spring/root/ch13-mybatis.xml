@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:mybatis-spring="http://mybatis.org/schema/mybatis-spring"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+		http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<!-- mybatis Bean 객체 생성-->
+	<!-- 주어진 DataSource를 시용하여 DB연동 및 XML파일로 SQL문을 생성 및 실행하는 객체 생성 -->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<!-- Setter에 Connection Pool 객체 제공  -->
+		<property name="dataSource" ref="dataSource"/>
+		<!-- logger에 대한 공통 설정 -->
+		<property name="configLocation" value="classpath:mybatis/mapper-config.xml"/>
+		<!-- Table 마다 작성하는 log는 무엇인가? -->
+		<property name="mapperLocations" value="classpath:mybatis/mapper/*.xml"/>
+	</bean>
+	
+	<!-- 자바 코드에서 SqlSessionFactoryBean 객체를 쉽게 이용할 수 있도록 제공되는 객체 -->
+	<bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg ref="sqlSessionFactory"/>
+	</bean>
+	
+	
+	<!-- Mybatis의 Dao 구현 객체를 생성하기 위한 인터페이스의 위치 설정 -->
+	<!-- @Mapper 어노테이션이 있는 인터페이스의 위치를 탐색한다. -->
+	<!-- <mybatis-spring:scan base-package="com.mycompany.springwebapp.dao.mybatis"/> -->
+</beans>
