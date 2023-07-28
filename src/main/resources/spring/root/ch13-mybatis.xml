@@ -26,7 +26,17 @@
 	</bean>
 	
 	
-	<!-- Mybatis의 Dao 구현 객체를 생성하기 위한 인터페이스의 위치 설정 -->
 	<!-- @Mapper 어노테이션이 있는 인터페이스의 위치를 탐색한다. -->
-	<!-- <mybatis-spring:scan base-package="com.mycompany.springwebapp.dao.mybatis"/> -->
+	<!-- base-package 속성 : 지정된 패키지의 하위에서 Mapper 인터페이스를 검색한다. -->
+	<!-- annotation 속성 : "org.apache.ibatis.annotations.Mapper"이 붙어있는 인터페이스만 탐색한다.  -->
+	<!-- Mybatis의 Dao 구현 객체를 생성하기 위한 인터페이스의 위치 설정 -->
+	<!-- 
+	@Mappper가 붙어있는 인터페이스만 매퍼로 등록하고
+	구현 객체를 자동으로 생성해서 스프링 관리 빈으로 생성한다 -> 어느곳이든 객체 정보를 다른 곳에 주입할 수 있다.
+	생략되면 base-package에 있는 모든 하위 인터페이스를 매퍼로 등록(매퍼XML과 연동)하고,
+	구현 객체를 자동으로 생성해서 스프링 관리 빈으로 생성 
+	 -->
+	<mybatis-spring:scan 
+		base-package="com.mycompany.springwebapp.dao"
+		annotation="org.apache.ibatis.annotations.Mapper"/>
 </beans>

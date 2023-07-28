@@ -17,7 +17,7 @@
 			<a href="updateBoard" class="btn btn-info btn-sm">게시물 변경(update)</a>
 		</div>
 		<div class="mt-2">
-			<a href="deleteBoard" class="btn btn-info btn-sm">게시물 삭제(delete)</a>
+			<a href="deleteBoard?bno=2" class="btn btn-info btn-sm">게시물 삭제(delete)</a>
 		</div>
 	</div>
 </div>

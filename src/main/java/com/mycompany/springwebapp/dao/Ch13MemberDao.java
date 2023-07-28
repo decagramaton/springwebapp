@@ -1,4 +1,4 @@
-package com.mycompany.springwebapp.dao.mybatis;
+package com.mycompany.springwebapp.dao;
 
 import javax.annotation.Resource;
 

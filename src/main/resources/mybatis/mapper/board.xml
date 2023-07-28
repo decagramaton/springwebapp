@@ -1,13 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.mycompany.springwebapp.dao.mybatis.Ch13BoardDaoOld">
+<mapper namespace="com.mycompany.springwebapp.dao.Ch13BoardDao">
 	<insert id="insert" parameterType="Board">
-		insert into board (bno, btitle, bcontent, mid, bdate, bhitcount)
-		values(seq_bno.nextval, #{btitle}, #{bcontent}, #{mid}, sysdate, 0)
-	</insert>
 	
+		<!-- keyProperty : DTO 객체의 필드 이름 -->
+		<!-- resultType : SQL문 결과 값의 타입형 -->
+		<!-- order : 실행 우선순위 - BEFORE: 가장 먼저 실행 -->
+		<selectKey keyProperty="bno" resultType="int" order="BEFORE">
+			select seq_bno.nextval from dual
+		</selectKey>
+	
+		insert into board (bno, btitle, bcontent, mid, bdate, bhitcount)
+		values(#{bno}, #{btitle}, #{bcontent}, #{mid}, sysdate, 0)
+	</insert>
+
 	<!-- DB 조회 결과, 한 행당 DTO 객체 1개를 만든다. -->
-	<select id="selectAll" parameterType="int" resultType="Board">
+	<select id="selectAll" resultType="Board">
 		select bno, btitle, bcontent, mid, bdate, bhitcount, battachoname, battachsname, battachtype, battachdata
 		from board
 	</select>
