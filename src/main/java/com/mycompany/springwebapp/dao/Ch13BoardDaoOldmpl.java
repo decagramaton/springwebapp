@@ -6,6 +6,7 @@ import javax.annotation.Resource;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 import com.mycompany.springwebapp.dto.Ch13Board;
+import com.mycompany.springwebapp.dto.Ch13Pager;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -24,6 +25,13 @@ public class Ch13BoardDaoOldmpl implements Ch13BoardDaoOld {
 		int successRows = sst.insert("com.mycompany.springwebapp.dao.Ch13BoardDaoOld.insert", board);
 	
 		return successRows;
+	}
+	
+	@Override
+	public List<Ch13Board> selectPageView(Ch13Pager pager) {
+		List<Ch13Board> boardList = sst.selectList("com.mycompany.springwebapp.dao.Ch13BoardDaoOld.selectAll", pager);
+		
+		return boardList;
 	}
 	
 	public List<Ch13Board> selectAll() {
@@ -48,5 +56,12 @@ public class Ch13BoardDaoOldmpl implements Ch13BoardDaoOld {
 		int successRows = sst.delete("com.mycompany.springwebapp.dao.Ch13BoardDaoOld.deleteByBno", bno);
 		
 		return successRows;
+	}
+	
+	@Override
+	public int count() {
+		int totalRows = sst.selectOne("com.mycompany.springwebapp.dao.Ch13BoardDaoOld.count");
+		
+		return totalRows;
 	}
 }

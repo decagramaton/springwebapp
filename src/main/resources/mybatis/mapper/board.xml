@@ -14,10 +14,32 @@
 		values(#{bno}, #{btitle}, #{bcontent}, #{mid}, sysdate, 0)
 	</insert>
 
+	<select id="selectPageView" parameterType="Pager" resultType="Board">
+		<![CDATA[
+		select rnum, bno, btitle, mid, bdate, bhitcount, battachoname
+		from (
+		    select rownum as rnum , bno, btitle, mid, bdate, bhitcount, battachoname
+		    from (
+		        select bno, btitle, mid, bdate, bhitcount, battachoname
+		        from board
+		        order by bno desc
+		    )
+		    where rownum <= ${endRowNo}
+		)
+		where rnum >= ${startRowNo}
+		]]>
+	</select>
+	
+	<select id="count" resultType="int">
+		select count(*) from board
+	</select>
+	
+	
 	<!-- DB 조회 결과, 한 행당 DTO 객체 1개를 만든다. -->
 	<select id="selectAll" resultType="Board">
-		select bno, btitle, bcontent, mid, bdate, bhitcount, battachoname, battachsname, battachtype, battachdata
+		select rnum, bno, btitle, mid, bdate, bhitcount, battachoname
 		from board
+		where bno=#{bno}
 	</select>
 	
 	<select id="selectByBno" parameterType="int" resultType="Board">

@@ -19,6 +19,19 @@
 		<div class="mt-2">
 			<a href="deleteBoard?bno=2" class="btn btn-info btn-sm">게시물 삭제(delete)</a>
 		</div>
+		<div class="mt-2">
+			<a href="getPageList" class="btn btn-info btn-sm">1페이지 가져오기(Pager)</a>
+		</div>
+	</div>
+</div>
+
+<div class="card m-2">
+	<div class="card-header">Ch13. MemberDAO</div>
+	<div class="card-body">
+		<div class="mt-2">
+			<a href="insertBoard" class="btn btn-info btn-sm">게시물 삽입(insert)</a>
+		</div>
+		
 	</div>
 </div>
 
