@@ -37,4 +37,21 @@ public class Ch13Controller {
 		boardDaoOld.insert(board);
 		return "redirect:/ch13/content";
 	}
+	
+	@GetMapping("/getBoardList")
+	public String getBoardList() {
+		boardDaoOld.selectAll();
+		return "redirect:/ch13/content";
+	}
+	
+	@GetMapping("/updateBoard")
+	public String updateBoard() {
+		boardDaoOld.updateByBno();
+		return "redirect:/ch13/content";
+	}
+	@GetMapping("/deleteBoard")
+	public String deleteBoard() {
+		boardDaoOld.deleteByBno();
+		return "redirect:/ch13/content";
+	}
 }
