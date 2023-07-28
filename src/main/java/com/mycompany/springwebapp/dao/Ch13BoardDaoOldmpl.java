@@ -28,8 +28,8 @@ public class Ch13BoardDaoOldmpl implements Ch13BoardDaoOld {
 	}
 	
 	@Override
-	public List<Ch13Board> selectPageView(Ch13Pager pager) {
-		List<Ch13Board> boardList = sst.selectList("com.mycompany.springwebapp.dao.Ch13BoardDaoOld.selectAll", pager);
+	public List<Ch13Board> selectByPage(Ch13Pager pager) {
+		List<Ch13Board> boardList = sst.selectList("com.mycompany.springwebapp.dao.Ch13BoardDaoOld.selectByPage", pager);
 		
 		return boardList;
 	}

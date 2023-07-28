@@ -16,6 +16,7 @@ import com.mycompany.springwebapp.dao.Ch13MemberDao;
 import com.mycompany.springwebapp.dto.Ch13Board;
 import com.mycompany.springwebapp.dto.Ch13Member;
 import com.mycompany.springwebapp.dto.Ch13Pager;
+import com.mycompany.springwebapp.service.Ch13BoardService;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -28,46 +29,17 @@ public class Ch13Controller {
 	private Ch13BoardDaoOldmpl boardDaoOld;
 	
 	@Autowired
-	private Ch13BoardDao boardDao;
+	private Ch13BoardService boardService;
+
 	
-	@Autowired
-	private Ch13MemberDao memberDao;
+	
+	
 	
 	
 	@RequestMapping("/content")
 	public String content() {
 		return "ch13/content";
 	}
-	
-	
-	@GetMapping("/insertMember")
-	public String insertMember() {
-		Ch13Member member = new Ch13Member();
-		member.setMid("user1");
-		member.setMname("사용자1");
-		member.setMpassword("12345");
-		member.setMemail("이메일1");
-		memberDao.insert(member);
-		
-		log.info("저장된 board no : " + member.getMid());
-		
-		return "redirect:/ch13/content";
-	}
-	
-	@GetMapping("/getMemberList")
-	public String getMemberList() {
-		Ch13Member member = memberDao.selectMyMid("user1");
-		log.info(member.toString());
-		
-		return "redirect:/ch13/content";
-	}
-	
-	
-	
-	
-	
-	
-	
 	
 	
 	@GetMapping("/insertBoard")
@@ -78,7 +50,8 @@ public class Ch13Controller {
 		board.setBtitle("제목");
 		board.setBcontent("내용");
 		board.setMid("user");
-		boardDao.insert(board);
+		
+		boardService.write(board);
 
 		
 		//boardDaoOld.insert(board);
@@ -91,9 +64,9 @@ public class Ch13Controller {
 	
 	@GetMapping("/getPageList")
 	public String getPageList() {
-		int totalRows = boardDao.count();
-		Ch13Pager pager = new Ch13Pager(10, 5, totalRows, 1);
-		List<Ch13Board> boardList = boardDao.selectPageView(pager);
+		int totalBoardNum = boardService.getTotalBoardNum();
+		Ch13Pager pager = new Ch13Pager(10, 5, totalBoardNum, 1);
+		List<Ch13Board> boardList = boardService.getList(pager);
 		
 		for(Ch13Board board : boardList) {
 			log.info(board.toString());
@@ -106,29 +79,30 @@ public class Ch13Controller {
 	@GetMapping("/getBoardList")
 	public String getBoardList() {
 		//List<Ch13Board> boardList = boardDaoOld.selectAll();
-		List<Ch13Board> boardList = boardDao.selectAll();
+		int bno = 1;
+		Ch13Board board = boardService.getBoard(bno);
 		
-		log.info(boardList.toString());
+		log.info(board.toString());
 		
 		return "redirect:/ch13/content";
 	}
 	
 	@GetMapping("/updateBoard")
 	public String updateBoard() {
-		
-		Ch13Board board = boardDao.selectByBno(4);
+		int bno = 1;
+		Ch13Board board = boardService.getBoard(bno);
 		board.setBtitle("변경된 제목");
 		board.setBcontent("변경된 내용");
 		
 		//boardDaoOld.updateByBno(board);
-		boardDao.updateByBno(board);
+		boardService.modify(board);
 		return "redirect:/ch13/content";
 	}
 	
 	@GetMapping("/deleteBoard")
 	public String deleteBoard(int bno) {
 		//boardDaoOld.deleteByBno(bno);
-		boardDao.deleteByBno(bno);
+		boardService.remove(bno);
 		return "redirect:/ch13/content";
 	}
 }
