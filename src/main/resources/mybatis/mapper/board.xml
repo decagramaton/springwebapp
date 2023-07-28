@@ -1,20 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.mycompany.springwebapp.dao.mybatis.Ch13BoardDaoOld">
-	<insert id="insert" parameterType="com.mycompany.springwebapp.dto.Ch13Board">
+	<insert id="insert" parameterType="Board">
 		insert into board (bno, btitle, bcontent, mid, bdate, bhitcount)
 		values(seq_bno.nextval, #{btitle}, #{bcontent}, #{mid}, sysdate, 0)
 	</insert>
 	
 	<!-- DB 조회 결과, 한 행당 DTO 객체 1개를 만든다. -->
-	<select id="selectAll" resultType="com.mycompany.springwebapp.dto.Ch13Board">
+	<select id="selectAll" parameterType="int" resultType="Board">
 		select bno, btitle, bcontent, mid, bdate, bhitcount, battachoname, battachsname, battachtype, battachdata
 		from board
 	</select>
 	
+	<select id="selectByBno" parameterType="int" resultType="Board">
+		select bno, btitle, bcontent, mid, bdate, bhitcount, battachoname, battachsname, battachtype, battachdata
+		from board
+		where bno=${bno}
+	</select>
+	
 	<!-- 실행을 위해 객체를 제공해야하면  parameterType 속성 사용-->
-	<!-- 결과을 위해 객체를 받아야하면  parameterType 속성 사용-->
-	<update id="updateByBno" parameterType="com.mycompany.springwebapp.dto.Ch13Board">
+	<!-- 결과을 위해 객체를 받아야하면  resultType 속성 사용-->
+	<update id="updateByBno" parameterType="Board">
 		update board set btitle=#{btitle}, bcontent=#{bcontent} where bno=#{bno}
 	</update>
 	

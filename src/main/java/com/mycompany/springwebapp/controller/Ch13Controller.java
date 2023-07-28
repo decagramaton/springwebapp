@@ -1,6 +1,7 @@
 package com.mycompany.springwebapp.controller;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.annotation.Resource;
 
@@ -40,18 +41,26 @@ public class Ch13Controller {
 	
 	@GetMapping("/getBoardList")
 	public String getBoardList() {
-		boardDaoOld.selectAll();
+		List<Ch13Board> boardList = boardDaoOld.selectAll();
+		log.info(boardList.toString());
+		
 		return "redirect:/ch13/content";
 	}
 	
 	@GetMapping("/updateBoard")
 	public String updateBoard() {
-		boardDaoOld.updateByBno();
+		
+		Ch13Board board = boardDaoOld.selectByBno(1);
+		board.setBtitle("변경된 제목");
+		board.setBcontent("변경된 내용");
+		
+		boardDaoOld.updateByBno(board);
 		return "redirect:/ch13/content";
 	}
+	
 	@GetMapping("/deleteBoard")
-	public String deleteBoard() {
-		boardDaoOld.deleteByBno();
+	public String deleteBoard(int bno) {
+		boardDaoOld.deleteByBno(bno);
 		return "redirect:/ch13/content";
 	}
 }
