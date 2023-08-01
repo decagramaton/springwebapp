@@ -9,9 +9,16 @@
 		<selectKey keyProperty="bno" resultType="int" order="BEFORE">
 			select seq_bno.nextval from dual
 		</selectKey>
-	
-		insert into board (bno, btitle, bcontent, mid, bdate, bhitcount)
-		values(#{bno}, #{btitle}, #{bcontent}, #{mid}, sysdate, 0)
+		
+		<!-- if, NULL 값인 컬럼은 JDBC TYPE을 명시해야한다. -->
+		insert into board (bno, btitle, bcontent, mid, bdate, bhitcount, battachoname, battachtype, battachsname, battachdata)
+		values(
+			#{bno}, #{btitle}, #{bcontent}, #{mid}, sysdate, 0, 
+			#{battachoname, jdbcType=VARCHAR},
+			#{battachtype, jdbcType=VARCHAR},
+			#{battachsname, jdbcType=VARCHAR},
+			#{battachdata, jdbcType=BLOB}
+		)
 	</insert>
 
 	<select id="selectByPage" parameterType="Pager" resultType="Board">

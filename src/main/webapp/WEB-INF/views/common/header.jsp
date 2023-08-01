@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -21,6 +22,7 @@
             </a>
             <div>
                <div>
+               	  <%--
                   <c:if test="${login == null}">
                      <a href="${pageContext.request.contextPath}/ch08/login" class="btn btn-success btn-sm">로그인</a>
                      <!-- <a href="${pageContext.request.contextPath}/exam07/SaveSessionController" class="btn btn-success btn-sm">로그인</a> -->
@@ -31,6 +33,13 @@
                      <a href="${pageContext.request.contextPath}/ch08/logout" class="btn btn-success btn-sm">로그아웃</a>
                      <!-- <a href="${pageContext.request.contextPath}/exam07/RemoveSessionController" class="btn btn-success btn-sm">로그아웃</a> -->
                   </c:if>
+                  --%>
+					<c:if test="${ch13Login == null}">
+						<a href="login" class="btn btn-info btn-sm">로그인</a>
+					</c:if>
+					<c:if test="${ch13Login != null}">
+						<a href="logout" class="btn btn-info btn-sm">로그아웃</a>
+					</c:if>
                </div>
             </div>
          </nav>

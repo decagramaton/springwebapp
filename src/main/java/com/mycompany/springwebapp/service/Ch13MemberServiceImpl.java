@@ -1,6 +1,8 @@
 package com.mycompany.springwebapp.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.factory.PasswordEncoderFactories;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.mycompany.springwebapp.dao.Ch13MemberDao;
@@ -17,20 +19,30 @@ public class Ch13MemberServiceImpl implements Ch13MemberService {
 	
 	@Override
 	public Ch13Member getMember(String mid) {
-		Ch13Member member = memberDao.selectMyMid(mid);
+		Ch13Member member = memberDao.selectByMid(mid);
 		return member;
 	}
 	
 	
 	@Override
-	public void join(Ch13Member member) {
-		memberDao.insert(member);
+	public JoinResult join(Ch13Member member) {
+		Ch13Member dbMember = memberDao.selectByMid(member.getMid());
+		
+		if(dbMember != null) {
+			return JoinResult.FAIL_DUPLICATED_MID;
+		} else {
+			PasswordEncoder passwordEncoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
+			member.setMpassword(passwordEncoder.encode(member.getMpassword()));
+			
+			memberDao.insert(member);
+			return JoinResult.SUCCESS;
+		}
 	}
 	
 	@Override
 	public LoginResult login(Ch13Member member) {
 		//Step1. 로그인ID를 매개변수로 DB에서 해당하는 Member 정보 얻기
-		Ch13Member dbMember = memberDao.selectMyMid(member.getMid());
+		Ch13Member dbMember = memberDao.selectByMid(member.getMid());
 		
 		//Step2. Member 정보가 없으면 미가입 상태
 		if(dbMember == null) {
@@ -39,7 +51,9 @@ public class Ch13MemberServiceImpl implements Ch13MemberService {
 		
 		//Step3. DB의 PW와 로그인 PW가 같은지 확인
 		// 활성
-		if(dbMember.getMpassword().equals(member.getMpassword())) {
+		PasswordEncoder passwordEncoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
+		
+		if(passwordEncoder.matches(member.getMpassword(), dbMember.getMpassword())) {
 			if(dbMember.isMenabled()) {
 				return LoginResult.SUCCESS;
 			} else {
@@ -48,9 +62,6 @@ public class Ch13MemberServiceImpl implements Ch13MemberService {
 		} else {
 			return LoginResult.FAIL_MPASSWORD;
 		}
-		
-		
-		
 	}
 	
 	@Override
@@ -68,7 +79,7 @@ public class Ch13MemberServiceImpl implements Ch13MemberService {
 	
 	@Override
 	public void unjoin(String mid) {
-		Ch13Member member = memberDao.selectMyMid(mid);
+		Ch13Member member = memberDao.selectByMid(mid);
 		member.setMenabled(false);
 		memberDao.update(member);
 	}
