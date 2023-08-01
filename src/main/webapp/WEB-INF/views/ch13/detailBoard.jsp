@@ -1,5 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 
 <div class="card m-2">
@@ -61,9 +61,10 @@
 				</div>
 				
 				<a class="btn btn-info btn-sm mt-2" href="getBoardList">목록</a>
-				<a class="btn btn-info btn-sm mt-2" href="updateBoard?bno=${board.bno}">수정</a>
-				<a class="btn btn-info btn-sm mt-2" href="detailBoard?bno=${board.bno}">삭제</a>
-				
+				<c:if test="${ch13Login.mid == board.mid}">
+					<a class="btn btn-info btn-sm mt-2" href="updateBoard?bno=${board.bno}">수정</a>
+					<a class="btn btn-info btn-sm mt-2" href="deleteBoard?bno=${board.bno}">삭제</a>
+				</c:if>
 			</div>
 		</div>
 	</div>

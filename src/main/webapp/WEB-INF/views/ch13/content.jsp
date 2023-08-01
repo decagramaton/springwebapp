@@ -42,7 +42,7 @@
 	<div class="card-header">게시판</div>
 	<div class="card-body">
 		<div class="mt-2">
-			<a href="getBoardList" class="btn btn-info btn-sm">회원 가입 페이지 이동</a>
+			<a href="getBoardList" class="btn btn-info btn-sm">게시판 이동</a>
 		</div>
 	</div>
 </div>

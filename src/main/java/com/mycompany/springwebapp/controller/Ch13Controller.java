@@ -169,11 +169,25 @@ public class Ch13Controller {
 	
 	
 	@GetMapping("/getBoardList")
-	public String getBoardList(@RequestParam(defaultValue="1") int pageNo, Model model) {
+	public String getBoardList(String pageNo, Model model, HttpSession session) {
+		// 브라우저에서 page 번호 정보가 전달되지 않은경우.
+		if(pageNo == null) {
+			
+			// Session에 "pageNo" 데이터 유무 확인
+			pageNo = (String) session.getAttribute("pageNo");
+			if(pageNo == null) {
+				// 브라우저, Session 모두 페이지 정보가 없으면 1페이지로 초기화
+				pageNo = "1";
+			}
+		}
+		
+		// String -> int
+		int intPageNo = Integer.parseInt(pageNo);
+		// Session에 pageNo 저장
+		session.setAttribute("pageNo", String.valueOf(pageNo));
 		
 		int totalBoardNum = boardService.getTotalBoardNum();
-		
-		Ch13Pager pager = new Ch13Pager(10, 5, totalBoardNum, pageNo);
+		Ch13Pager pager = new Ch13Pager(10, 5, totalBoardNum, intPageNo);
 		List<Ch13Board> boardList = boardService.getList(pager);
 		
 		model.addAttribute("pager", pager);
@@ -249,22 +263,35 @@ public class Ch13Controller {
 	}
 	
 	
-	
+	@Login
 	@GetMapping("/updateBoard")
-	public String updateBoard(int bno) {
+	public String getUpdateBoard(int bno, Model model, HttpSession session) {
 		Ch13Board board = boardService.getBoard(bno);
-		board.setBtitle("변경된 제목");
-		board.setBcontent("변경된 내용");
 		
-		//boardDaoOld.updateByBno(board);
-		boardService.modify(board);
-		return "redirect:/ch13/content";
+		/*
+		Ch13Member member = (Ch13Member) session.getAttribute("ch13Login");
+		if(member.getMid().equals(board.getMid())) {
+			return "redirect:/ch13/getBoardList";
+		} else {
+			return "redirect:/ch13/getBoardList";
+		}
+		*/
+		
+		model.addAttribute("board", board);
+		return "ch13/updateBoardForm";
 	}
 	
+	@PostMapping("/updateBoard")
+	public String postUpdateBoard(Ch13Board board, Model model) {
+		boardService.modify(board);
+		
+		return "redirect:/ch13/getBoardList";
+	}
+	
+	@Login
 	@GetMapping("/deleteBoard")
 	public String deleteBoard(int bno) {
-		//boardDaoOld.deleteByBno(bno);
 		boardService.remove(bno);
-		return "redirect:/ch13/content";
+		return "redirect:/ch13/getBoardList";
 	}
 }

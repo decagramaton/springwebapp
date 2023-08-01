@@ -47,4 +47,12 @@ public class Ch10ExceptionHandler {
 		return "ch10/404";
 	}
 	
+	
+	@ExceptionHandler(Ch15NotFoundAccountException.class)
+	@ResponseStatus(HttpStatus.NOT_FOUND)
+	public String handleNotFoundAccountException(Ch15NotFoundAccountException e, Model model) {
+		model.addAttribute("transferError", e.getMessage());
+		return "ch15/content";
+	}
+	
 }

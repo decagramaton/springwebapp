@@ -16,8 +16,11 @@
 		<config>src/main/resources/spring/root/Ch12-createBean-di.xml</config>
 		<config>src/main/resources/spring/root/ch13-mybatis.xml</config>
 		<config>src/main/resources/spring/dispatcher/ch02-ch08-ch13-interceptor.xml</config>
+		<config>src/main/resources/spring/dispatcher/ch14-aop.xml</config>
+		<config>src/main/resources/spring/root/ch15-transaction.xml</config>
 	</configs>
 	<autoconfigs>
+		<config>src/main/resources/spring/dispatcher/Ch13-properties.xml</config>
 		<config>src/main/resources/spring/root/Ch12-properties.xml</config>
 		<config>src/main/resources/spring/root/ch13-connection-pool.xml</config>
 	</autoconfigs>
